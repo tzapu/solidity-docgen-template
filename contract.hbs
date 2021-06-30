@@ -11,7 +11,7 @@
 {{#if ownVariables}}
 ## Globals
 
-> Note this contains internal vars as well due to a bug in the docgen
+> Note this contains internal vars as well due to a bug in the docgen procedure
 
 | Var | Type |
 | --- | :---: |
@@ -74,15 +74,17 @@
 | Arg | Type | Description |
 | --- | --- | --- |
 {{#natspec.params}}
-|`{{param}}` | {{#lookup ../args.types @index}}{{/lookup}} | {{description}} {{~"|"}}
+|`{{param}}` | {{#lookup ../args.types @index}}{{/lookup}} | {{description}}
 {{~/natspec.params}}
 {{/if}}
 
 {{#if natspec.returns}}
 #### Returns:
+| Type | Description |
+| --- | --- |
 {{#natspec.returns}}
-- {{param}} {{description}}
-{{/natspec.returns}}
+|`{{param}}` | {{description}} 
+{{~/natspec.returns}}
 {{/if}}
 
 {{/ownFunctions}}
