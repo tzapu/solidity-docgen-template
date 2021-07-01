@@ -14,7 +14,7 @@
 > Note this contains internal vars as well due to a bug in the docgen procedure
 
 | Var | Type |
-| --- | :---: |
+| --- | --- |
 {{#ownVariables}}
 {{#unless (eq visibility "internal")}}
 | {{name}} | {{ type }} |
@@ -66,8 +66,19 @@
     {{#natspec.params}}
     {{#lookup ../args.types @index}}{{/lookup}} {{param}}{{#if @last}}{{else}},{{/if}}
     {{/natspec.params}}
-  ) {{visibility}}{{#if outputs}} returns ({{outputs}}){{/if}}
+  ) {{visibility}}{{#astNode.modifiers}} {{modifierName.name}}{{/astNode.modifiers}}{{#if outputs}} returns ({{outputs}}){{/if}}
 ```
+
+#### Modifiers:
+{{#if astNode.modifiers}}
+| Modifier |
+| --- |
+{{#astNode.modifiers}}
+| {{modifierName.name}} |
+{{/astNode.modifiers}}
+{{else}}
+No modifiers
+{{/if}}
 
 {{#if natspec.params}}
 #### Args:
@@ -103,7 +114,7 @@
 {{#if natspec.params}}
 #### Params:
 | Param | Type | Indexed | Description |
-| --- | :---: | :---: | --- |
+| --- | --- | :---: | --- |
 {{#natspec.params}}
 |`{{param}}` | {{lookup ../args.types @index}} | {{#with (lookup ../astNode.parameters.parameters @index)}}{{#if indexed}}:white_check_mark:{{/if}}{{/with}} | {{description}} {{~-~}}
 {{/natspec.params}}
